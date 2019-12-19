@@ -5,9 +5,9 @@ var now = moment();
 
 var hour = now.format('h')
 var minute = now.format('mm')
-var second = now.format('ss')
+// var second = now.format('ss')
 
-console.log(hour + minute + second)
+console.log(hour)
 
 
 
@@ -28,23 +28,12 @@ var present_e = $(".present");
 
 var row_container_e = $("<div>");
 var row_e = $("<div>");
-// var textarea_e = $("<textarea>");
-// var save_button_e = $("<button>");
-// var save_icon_e = $("<i>");
-
-// function create_row_container() {
-// var row_e = $("<div>");
-//         row_e.attr("class", "col-md-12");
-//         row_e.attr("style", "display: flex;");
-//         row_container_e.append(row_e);
-// }
-
 
 
 
 function create_containers() {
-    var time_am = 8
-    var time_pm = 0
+    var time = 8
+
     //Create Row Div
     var row_container_e = $("<div>");
     row_container_e.attr("class", "row");
@@ -52,25 +41,46 @@ function create_containers() {
     
     container_e.append(row_container_e);
     for (var i = 0; i < 9; i++){
-        
+        var time = ((time + 11) % 12 + 1);
         //Create Each row
         var row_e = $("<div>");
         row_e.attr("class", "col-md-12");
         row_e.attr("style", "display: flex;");
         row_container_e.append(row_e);
 
+
         //Create Time label
         var label_e = $("<label>");
-        if (time_am < 12){
-            time_am++
-            label_e.text(time_am + "AM");
+        if (time < 12){
+            time++
+            label_e.text(time + "AM");
         }
         else {
-            time_pm++
-            label_e.text(time_pm + "PM");
+            // time_pm++
+            time++
+            label_e.text(time + "PM");
         }
+
+
+
+
+
+        // //Create Time label
+        // var label_e = $("<label>");
+        // if (time_am < 12){
+        //     time_am++
+        //     label_e.text(time_am + "AM");
+        // }
+        // else {
+        //     time_pm++
+        //     label_e.text(time_pm + "PM");
+        // }
+
+
+
+
         label_e.attr("class", "hour col-md-2");
-        label_e.attr("style", "height: 100%;");
+        label_e.attr("style", "height: 100%; padding-left: 140px;");
         row_e.append(label_e);
 
         //Create Text Area
@@ -78,6 +88,8 @@ function create_containers() {
         textarea_e.attr("class", "description hour present col-md-8");
         textarea_e.attr("style", "height: 100%;");
         row_e.append(textarea_e);
+
+
 
         //Create Save Button
         var save_button_e = $("<button>");
