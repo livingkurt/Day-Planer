@@ -11,6 +11,7 @@ var hour = now.format('HH')
 
 var hour = 13
 var container_e = $(".container");
+var button_num = 0
 
 
 // var body_e = $("body");
@@ -31,7 +32,7 @@ var container_e = $(".container");
 // var row_container_e = $("<div>");
 // var row_e = $("<div>");
 
-var day_data = {}
+
 
 
 function create_containers() {
@@ -80,10 +81,11 @@ function create_containers() {
         }
         textarea_e.attr("style", "height: 100%; resize: none; color: black;");
         row_e.append(textarea_e);
-
+        button_num++
         //Create Save Button
         var save_button_e = $("<button>");
-        save_button_e.attr("class", "saveBtn hour col-md-1 col-md-1");
+        save_button_e.attr("class", "saveBtn hour col-md-1 col-md-1 save_btn");
+        save_button_e.attr("id", "button_" + button_num);
         save_button_e.attr("style", "height: 100%;");
         row_e.append(save_button_e);
 
@@ -92,82 +94,89 @@ function create_containers() {
         save_icon_e.attr("class", "far fa-save");
         save_icon_e.attr("style", "font-size: 40px");
         save_button_e.append(save_icon_e);
-    }
+        var daily_data = {}
+        // if (localStorage.getItem("day_data") === null) { //If there isnt anything in storage
+        //     console.log("is not Storage")
+        //     var initials_to_save = answer_i_e.value;
+        //     console.log(initials_to_save)
+        //     day_data[initials_to_save] = score
+        //     console.log(day_data)
+        //     localStorage.setItem("scores", JSON.stringify(day_data));
+        // }
+        
+        // else if (localStorage.getItem("day_data") !== null) { //If there is something in storage
+        //     console.log("is Storage")
+        //     var initials_to_save = answer_i_e.value;
+        //     console.log(initials_to_save)
+        //     var day_data = JSON.parse(localStorage.getItem("scores"));
+        //     console.log(day_data)
+        //     day_data[initials_to_save] = score
+        //     console.log(day_data)
+        //     localStorage.setItem("scores", JSON.stringify(day_data));
 
+
+
+
+
+    }
+    
 }
 
 create_containers();
 
+$(".save_btn").on("click", function(event){
+    console.log(this)
+})
 
 
-function view_highscores(){
-    
-    
-    if (localStorage.getItem("scores") === null) { //If there isnt anything in storage
-        console.log("is not Storage")
-        saved_highscores_ul_e.setAttribute("style", "display: none;");
-        empty_highscores_table_l_e.textContent = "Highscores will populate here when you complete the quiz";
-        empty_highscores_table_l_e.setAttribute("style", "display: flex;");
-        empty_highscores_table_l_e.setAttribute("style", "display: flex; background-color: rgb(1, 10, 49); padding: 5px; border: 1px solid rgb(1, 12, 49); margin: 16px 0px; color: white; border-radius: 10px;");
-    }
-    
-    else if (localStorage.getItem("scores") !== null) { //If there is something in storage
-        console.log("is Storage")
-        var initials_to_save = answer_i_e.value;
-        console.log(initials_to_save)
-        var highscore_saved_list = JSON.parse(localStorage.getItem("scores"));
-        console.log(highscore_saved_list)
-    }
-    populate_list(highscore_saved_list);
-}
+// $("button").on("click", function() {
 
-//Submits highscore to be stored in local storage and displayed on highscores page
-function submit_highscore() {
-    //Check if there is anything in storage
-    var submit_au_e = document.createElement("audio");
-    submit_au_e.setAttribute("src", "assets/audio/submit.mp3");
-    submit_au_e.play();
-    var highscore_saved_list = {}
-    if (localStorage.getItem("scores") === null) { //If there isnt anything in storage
-        console.log("is not Storage")
-        var initials_to_save = answer_i_e.value;
-        console.log(initials_to_save)
-            highscore_saved_list[initials_to_save] = score
-            console.log(highscore_saved_list)
-            localStorage.setItem("scores", JSON.stringify(highscore_saved_list));
-    }
-    
-    else if (localStorage.getItem("scores") !== null) { //If there is something in storage
-        console.log("is Storage")
-        var initials_to_save = answer_i_e.value;
-        console.log(initials_to_save)
-        var highscore_saved_list = JSON.parse(localStorage.getItem("scores"));
-        console.log(highscore_saved_list)
-        highscore_saved_list[initials_to_save] = score
-        console.log(highscore_saved_list)
-        localStorage.setItem("scores", JSON.stringify(highscore_saved_list));
-    }
-    populate_list(highscore_saved_list);
-}
 
-function populate_list(a) {
-    $("#saved_highscores_ul").empty();
-    var highscore_length = Object.keys(a).length
-    var keys = Object.keys(a);
-    var values = Object.values(a);
-    console.log(keys)
-    console.log(values)
-    for (var i = 0; i < highscore_length; i++) {
-        var user_name = keys[i];
-        var user_score = values[i];
-        var num = i + 2
-        var user_data = (i + 1) + ". " + user_name.toUpperCase() + " - " + user_score
-        var li = document.createElement("li");
-        li.textContent = user_data;
-        li.setAttribute("data-index", i);
-        li.setAttribute("style", "background-color: rgb(1, 10, 49); padding: 5px; border: 1px solid rgb(1, 12, 49); color: white; border-radius: 10px; margin-bottom: 7px;");
-        saved_highscores_ul_e.setAttribute("style", "display: flex;"); 
-        saved_highscores_ul_e.appendChild(li);
-    }
-    high_scores();
-}
+
+
+// //Submits highscore to be stored in local storage and displayed on highscores page
+// function submit_highscore() {
+//     var day_data = {}
+//     if (localStorage.getItem("scores") === null) { //If there isnt anything in storage
+//         console.log("is not Storage")
+//         var initials_to_save = answer_i_e.value;
+//         console.log(initials_to_save)
+//         day_data[initials_to_save] = score
+//         console.log(day_data)
+//         localStorage.setItem("scores", JSON.stringify(day_data));
+//     }
+    
+//     else if (localStorage.getItem("scores") !== null) { //If there is something in storage
+//         console.log("is Storage")
+//         var initials_to_save = answer_i_e.value;
+//         console.log(initials_to_save)
+//         var day_data = JSON.parse(localStorage.getItem("scores"));
+//         console.log(day_data)
+//         day_data[initials_to_save] = score
+//         console.log(day_data)
+//         localStorage.setItem("scores", JSON.stringify(day_data));
+//     }
+//     populate_list(day_data);
+// }
+
+// function populate_list(a) {
+//     $("#saved_highscores_ul").empty();
+//     var highscore_length = Object.keys(a).length
+//     var keys = Object.keys(a);
+//     var values = Object.values(a);
+//     console.log(keys)
+//     console.log(values)
+//     for (var i = 0; i < highscore_length; i++) {
+//         var user_name = keys[i];
+//         var user_score = values[i];
+//         var num = i + 2
+//         var user_data = (i + 1) + ". " + user_name.toUpperCase() + " - " + user_score
+//         var li = document.createElement("li");
+//         li.textContent = user_data;
+//         li.setAttribute("data-index", i);
+//         li.setAttribute("style", "background-color: rgb(1, 10, 49); padding: 5px; border: 1px solid rgb(1, 12, 49); color: white; border-radius: 10px; margin-bottom: 7px;");
+//         saved_highscores_ul_e.setAttribute("style", "display: flex;"); 
+//         saved_highscores_ul_e.appendChild(li);
+//     }
+//     high_scores();
+// }
