@@ -1,36 +1,87 @@
 $(document).ready(function(){
+    
 
 var now = moment();
-
-
-// console.log(now.format('h:mm:ss a'))
+var date = now.format('MMMM Do YYYY, h:mm:ss a');
+console.log(date);
 
 var hour = now.format('HH')
-// console.log(hour)
-// console.log(hour.substring(1))
 
-var hour_format = parseInt(hour.substring(1));
 
-// console.log(hour_format)
 
-if (hour_format === "0"){
-    var hour = now.format('HH')
-    console.log(hour)
-}
-else {
-    var hour = now.format('H')
-    console.log(hour)
-}
-
-hour = parseInt(hour)
-
-// var hour = 9
+// var hour = 13
 var container_e = $(".container");
+var jumbotron_e = $(".jumbotron")
+var current_day_e = $("#currentDay");
 var num = 0
 
-
-create_containers();
 load_data();
+get_time();
+create_containers();
+// create_date(current_day_e);
+
+// function create_date(current_day_e){
+//     console.log("time")
+//     date = now.format('MMMM Do YYYY, h:mm:ss a');
+//     current_day_e.text(date);
+//     jumbotron_e.append(current_day_e);
+    
+//     // var timerInterval = setInterval(function() {
+
+// }
+// setInterval(create_date(current_day_e), 1000);
+
+
+// var update = function() {
+//     // document.getElementById("datetime")
+//     .innerHTML = moment().format('MMMM Do YYYY, h:mm:ss a');
+// }
+// setInterval(update, 1000);
+
+// function setTime() {
+//     var timerInterval = setInterval(function() {
+//     window.timerInterval = timerInterval
+//     // secondsLeft--;
+//     // time_l_e.textContent = "Time: " + secondsLeft;
+
+//   }, 1000);
+// }
+
+// $('#clock').fitText(1.3);
+
+function update() {
+    // console.log("time")
+    // date = now.format('MMMM Do YYYY, h:mm:ss a');
+    // current_day_e.text(date);
+    // jumbotron_e.append(current_day_e);
+    current_day_e.html(moment().format('MMMM Do, YYYY H:mm:ss a'));
+}
+
+setInterval(update, 1000);
+
+
+function get_time(){
+    // console.log(hour)
+    // console.log(hour.substring(1))
+    // var hour = "13"
+    var hour_format = parseInt(hour.substring(1));
+    // console.log(hour_format)
+    if (hour_format === "0"){
+        hour = now.format('HH')
+        // var hour = "13"
+        console.log(hour)
+    }
+    else {
+        hour = now.format('H')
+        // var hour = "13"
+        console.log(hour)
+    }
+    hour = parseInt(hour)
+
+}
+
+
+
 
 function create_containers() {
     //Create row container
@@ -86,12 +137,12 @@ function load_data(){
     else if (localStorage.getItem("day_data") !== null) {
         console.log("is Storage")
         var daily_data = JSON.parse(localStorage.getItem("day_data"));
-        console.log(daily_data)
+        // console.log(daily_data)
         for (var i = 1; i < 10; i++){
             // console.log(i)
             var data_get = "text_" + i
-            console.log(data_get)
-            console.log(daily_data.data_get)
+            // console.log(data_get)
+            // console.log(daily_data.data_get)
 
 
         }
