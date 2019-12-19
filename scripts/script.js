@@ -13,51 +13,73 @@ var hour = now.format('HH')
 var container_e = $(".container");
 var jumbotron_e = $(".jumbotron")
 var current_day_e = $("#currentDay");
+var text_areas_e = $(".text_areas");
+current_day_e.html(moment().format('MMMM Do, YYYY H:mm:ss a'));
 var num = 0
 
-load_data();
-get_time();
-create_containers();
-// create_date(current_day_e);
+var daily_data = {"text_1": "", "text_2": "", "text_3": "", "text_4": "", "text_5": "", "text_6": "", "text_7": "", "text_8": "", "text_9": ""}
 
-// function create_date(current_day_e){
-//     console.log("time")
-//     date = now.format('MMMM Do YYYY, h:mm:ss a');
-//     current_day_e.text(date);
-//     jumbotron_e.append(current_day_e);
-    
-//     // var timerInterval = setInterval(function() {
+// var daily_data = {"text_1": "", "text_2": "", "text_3": "", "text_4": "", "text_5": "", "text_6": "", "text_7": "", "text_8": "", "text_9": ""}
+var stored_daily_data = JSON.parse(localStorage.getItem("day_data"));
 
-// }
-// setInterval(create_date(current_day_e), 1000);
-
-
-// var update = function() {
-//     // document.getElementById("datetime")
-//     .innerHTML = moment().format('MMMM Do YYYY, h:mm:ss a');
-// }
-// setInterval(update, 1000);
-
-// function setTime() {
-//     var timerInterval = setInterval(function() {
-//     window.timerInterval = timerInterval
-//     // secondsLeft--;
-//     // time_l_e.textContent = "Time: " + secondsLeft;
-
-//   }, 1000);
-// }
-
-// $('#clock').fitText(1.3);
-
-function update() {
-    // console.log("time")
-    // date = now.format('MMMM Do YYYY, h:mm:ss a');
-    // current_day_e.text(date);
-    // jumbotron_e.append(current_day_e);
-    current_day_e.html(moment().format('MMMM Do, YYYY H:mm:ss a'));
+// If todos were retrieved from localStorage, update the todos array to it
+if (stored_daily_data !== null) {
+    daily_data = stored_daily_data;
 }
 
+// console.log("is Storage")
+// var daily_data = JSON.parse(localStorage.getItem("day_data"));
+console.log(daily_data)
+// var text = "text_1"
+// console.log(daily_data.text)
+var data_length = Object.keys(daily_data).length
+var key = Object.keys(daily_data);
+var values = Object.values(daily_data);
+
+
+var first = $("#text_1")
+console.log(key)
+console.log(values)
+
+for (var i = 1; i < data_length; i++){
+    // console.log(i)
+    // var data_get = "text_" + i
+    // console.log(data_get)
+    // console.log(daily_data.data_get)
+// }
+// for (var i = 0; i < data_length; i++) {
+    console.log(i)
+    var text_boxes = key[i];
+    var tasks = values[i];
+    console.log(tasks)
+    // text_boxes = $("'#" + keys[i] + "'")
+    console.log(String(text_boxes))
+    // console.log(tasks)
+    
+    // var num = i + 2
+    // var user_data = (i + 1) + ". " + user_name.toUpperCase() + " - " + user_score
+    // var li = document.createElement("li");
+    // text_boxes.textContent = tasks;
+    $(text_boxes).text(tasks)
+    // li.setAttribute("data-index", i);
+    // li.setAttribute("style", "background-color: rgb(1, 10, 49); padding: 5px; border: 1px solid rgb(1, 12, 49); color: white; border-radius: 10px; margin-bottom: 7px;");
+    // saved_highscores_ul_e.setAttribute("style", "display: flex;"); 
+    // saved_highscores_ul_e.appendChild(li);
+}
+
+
+
+// load_data();
+get_time();
+create_containers();
+
+
+function update() {
+    current_day_e.html(moment().format('MMMM Do, YYYY H:mm:ss a'));
+}
 setInterval(update, 1000);
+
+
 
 
 function get_time(){
@@ -69,19 +91,16 @@ function get_time(){
     if (hour_format === "0"){
         hour = now.format('HH')
         // var hour = "13"
-        console.log(hour)
+        // console.log(hour)
     }
     else {
         hour = now.format('H')
         // var hour = "13"
-        console.log(hour)
+        // console.log(hour)
     }
     hour = parseInt(hour)
 
 }
-
-
-
 
 function create_containers() {
     //Create row container
@@ -108,7 +127,11 @@ function create_containers() {
         create_icon(save_icon_e, save_button_e);
     }
 }
-var daily_data = {}
+
+
+
+$(".save_btn").on("click", save_data)
+
 function save_data(){
     
     var button_id = this.id
@@ -119,7 +142,7 @@ function save_data(){
     var textarea_id = $(text_id);
     // console.log(textarea_id)
     var text_value = textarea_id.val();
-    load_data();
+    // load_data();
     // console.log(value)
     daily_data[text_i] = text_value
     console.log(daily_data)
@@ -128,53 +151,6 @@ function save_data(){
     localStorage.setItem("day_data", JSON.stringify(daily_data));
     
 }
-
-function load_data(){
-    
-    if (localStorage.getItem("day_data") === null) {
-        console.log("is not Storage")
-    }
-    else if (localStorage.getItem("day_data") !== null) {
-        console.log("is Storage")
-        var daily_data = JSON.parse(localStorage.getItem("day_data"));
-        // console.log(daily_data)
-        for (var i = 1; i < 10; i++){
-            // console.log(i)
-            var data_get = "text_" + i
-            // console.log(data_get)
-            // console.log(daily_data.data_get)
-
-
-        }
-    }
-}
-
-
-
-// save_icon_e.attr("class", "far fa-save");
-        // save_icon_e.attr("style", "font-size: 40px");
-        // save_button_e.append(save_icon_e);
-        // var daily_data = {}
-        // if (localStorage.getItem("day_data") === null) { //If there isnt anything in storage
-        //     console.log("is not Storage")
-        //     var initials_to_save = answer_i_e.value;
-        //     console.log(initials_to_save)
-        //     daily_data[initials_to_save] = score
-        //     console.log(daily_data)
-        //     localStorage.setItem("scores", JSON.stringify(daily_data));
-        // }
-        
-        // else if (localStorage.getItem("day_data") !== null) { //If there is something in storage
-        //     console.log("is Storage")
-        //     var initials_to_save = answer_i_e.value;
-        //     console.log(initials_to_save)
-        //     var daily_data = JSON.parse(localStorage.getItem("scores"));
-        //     console.log(daily_data)
-        //     daily_data[initials_to_save] = score
-        //     console.log(daily_data)
-        //     localStorage.setItem("scores", JSON.stringify(daily_data));
-
-
 
 
 function create_row_container(row_container_e){
@@ -210,16 +186,17 @@ function create_label(label_e, row_e, time){
 
 function create_textarea(textarea_e, num, row_e, time){
     if (time === hour){
-        textarea_e.attr("class", " hour present col-md-10");
+        textarea_e.attr("class", "hour present col-md-10 text_areas");
     }
     else if(time < hour){
-        textarea_e.attr("class", " hour past col-md-10");
+        textarea_e.attr("class", "hour past col-md-10 text_areas");
     }
     else if(time > hour){
-        textarea_e.attr("class", " hour future col-md-10");
+        textarea_e.attr("class", "hour future col-md-10 text_areas");
     }
     textarea_e.attr("style", "height: 100%; resize: none; color: black;");
     textarea_e.attr("id", "text_" + num);
+    textarea_e.text("Daily");
     row_e.append(textarea_e);
 
 }
@@ -243,84 +220,4 @@ function create_icon(save_icon_e, save_button_e){
 
 
 
-$(".save_btn").on("click", save_data)
-
-
-
 })
-
-
-// save_icon_e.attr("class", "far fa-save");
-        // save_icon_e.attr("style", "font-size: 40px");
-        // save_button_e.append(save_icon_e);
-        // var daily_data = {}
-        // if (localStorage.getItem("day_data") === null) { //If there isnt anything in storage
-        //     console.log("is not Storage")
-        //     var initials_to_save = answer_i_e.value;
-        //     console.log(initials_to_save)
-        //     daily_data[initials_to_save] = score
-        //     console.log(daily_data)
-        //     localStorage.setItem("scores", JSON.stringify(daily_data));
-        // }
-        
-        // else if (localStorage.getItem("day_data") !== null) { //If there is something in storage
-        //     console.log("is Storage")
-        //     var initials_to_save = answer_i_e.value;
-        //     console.log(initials_to_save)
-        //     var daily_data = JSON.parse(localStorage.getItem("scores"));
-        //     console.log(daily_data)
-        //     daily_data[initials_to_save] = score
-        //     console.log(daily_data)
-        //     localStorage.setItem("scores", JSON.stringify(daily_data));
-
-// $("button").on("click", function() {
-
-
-
-
-// //Submits highscore to be stored in local storage and displayed on highscores page
-// function submit_highscore() {
-//     var day_data = {}
-//     if (localStorage.getItem("scores") === null) { //If there isnt anything in storage
-//         console.log("is not Storage")
-//         var initials_to_save = answer_i_e.value;
-//         console.log(initials_to_save)
-//         day_data[initials_to_save] = score
-//         console.log(day_data)
-//         localStorage.setItem("scores", JSON.stringify(day_data));
-//     }
-    
-//     else if (localStorage.getItem("scores") !== null) { //If there is something in storage
-//         console.log("is Storage")
-//         var initials_to_save = answer_i_e.value;
-//         console.log(initials_to_save)
-//         var day_data = JSON.parse(localStorage.getItem("scores"));
-//         console.log(day_data)
-//         day_data[initials_to_save] = score
-//         console.log(day_data)
-//         localStorage.setItem("scores", JSON.stringify(day_data));
-//     }
-//     populate_list(day_data);
-// }
-
-// function populate_list(a) {
-//     $("#saved_highscores_ul").empty();
-//     var highscore_length = Object.keys(a).length
-//     var keys = Object.keys(a);
-//     var values = Object.values(a);
-//     console.log(keys)
-//     console.log(values)
-//     for (var i = 0; i < highscore_length; i++) {
-//         var user_name = keys[i];
-//         var user_score = values[i];
-//         var num = i + 2
-//         var user_data = (i + 1) + ". " + user_name.toUpperCase() + " - " + user_score
-//         var li = document.createElement("li");
-//         li.textContent = user_data;
-//         li.setAttribute("data-index", i);
-//         li.setAttribute("style", "background-color: rgb(1, 10, 49); padding: 5px; border: 1px solid rgb(1, 12, 49); color: white; border-radius: 10px; margin-bottom: 7px;");
-//         saved_highscores_ul_e.setAttribute("style", "display: flex;"); 
-//         saved_highscores_ul_e.appendChild(li);
-//     }
-//     high_scores();
-// }
