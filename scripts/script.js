@@ -1,3 +1,5 @@
+$(document).ready(function(){
+
 var now = moment();
 
 
@@ -11,7 +13,7 @@ var hour = now.format('HH')
 
 var hour = 13
 var container_e = $(".container");
-var button_num = 0
+var num = 0
 
 
 // var body_e = $("body");
@@ -31,6 +33,13 @@ var button_num = 0
 
 // var row_container_e = $("<div>");
 // var row_e = $("<div>");
+
+function save_data(){
+    var button_id = this.id
+    console.log(button_id)
+    var text_id = "text" + button_id.substring(6)
+    console.log(text_id)
+}
 
 
 
@@ -64,7 +73,7 @@ function create_containers() {
         }
         label_e.attr("class", "hour col-md-1 col-sm-1");
         label_e.attr("style", "height: 100%; padding-left: 36px; min-width: 110px; padding-right: 33px;");
-
+        num++
         //Create Text Area  
         row_e.append(label_e);
         if (time === hour){
@@ -80,12 +89,13 @@ function create_containers() {
             textarea_e.attr("class", " hour future col-md-10");
         }
         textarea_e.attr("style", "height: 100%; resize: none; color: black;");
+        textarea_e.attr("id", "text_" + num);
         row_e.append(textarea_e);
-        button_num++
+        
         //Create Save Button
         var save_button_e = $("<button>");
         save_button_e.attr("class", "saveBtn hour col-md-1 col-md-1 save_btn");
-        save_button_e.attr("id", "button_" + button_num);
+        save_button_e.attr("id", "button_" + num);
         save_button_e.attr("style", "height: 100%;");
         row_e.append(save_button_e);
 
@@ -99,20 +109,20 @@ function create_containers() {
         //     console.log("is not Storage")
         //     var initials_to_save = answer_i_e.value;
         //     console.log(initials_to_save)
-        //     day_data[initials_to_save] = score
-        //     console.log(day_data)
-        //     localStorage.setItem("scores", JSON.stringify(day_data));
+        //     daily_data[initials_to_save] = score
+        //     console.log(daily_data)
+        //     localStorage.setItem("scores", JSON.stringify(daily_data));
         // }
         
         // else if (localStorage.getItem("day_data") !== null) { //If there is something in storage
         //     console.log("is Storage")
         //     var initials_to_save = answer_i_e.value;
         //     console.log(initials_to_save)
-        //     var day_data = JSON.parse(localStorage.getItem("scores"));
-        //     console.log(day_data)
-        //     day_data[initials_to_save] = score
-        //     console.log(day_data)
-        //     localStorage.setItem("scores", JSON.stringify(day_data));
+        //     var daily_data = JSON.parse(localStorage.getItem("scores"));
+        //     console.log(daily_data)
+        //     daily_data[initials_to_save] = score
+        //     console.log(daily_data)
+        //     localStorage.setItem("scores", JSON.stringify(daily_data));
 
 
 
@@ -124,10 +134,11 @@ function create_containers() {
 
 create_containers();
 
-$(".save_btn").on("click", function(event){
-    console.log(this)
-})
+$(".save_btn").on("click", save_data)
 
+
+
+})
 
 // $("button").on("click", function() {
 
