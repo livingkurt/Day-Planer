@@ -11,8 +11,6 @@ var minute = now.format('mm')
 
 var hour = 13
 
-var num_array = [9, 10, 11, 12, 13, 14, 15, 16, 17]
-
 
 var body_e = $("body");
 var container_e = $(".container");
@@ -34,17 +32,14 @@ var row_e = $("<div>");
 
 
 function create_containers() {
-    // var time_am = 8
-    // var time_pm = 0
     //Create Row Div
     var row_container_e = $("<div>");
     row_container_e.attr("class", "row");
     row_container_e.attr("style", "height: 100%;");
     
     container_e.append(row_container_e);
-    for (var i = 0; i < 9; i++){
-        var time = num_array[i]
-        
+    for (var i = 9; i < 18; i++){
+        var time = i
         
         //Create Each row
         var row_e = $("<div>");
@@ -55,12 +50,10 @@ function create_containers() {
         //Create Time label
         var label_e = $("<label>");
         if (time < 13){
-            // time_am++
             console.log(time)
             label_e.text(time + "AM");
         }
         else {
-            // time++
             var time_24 = time - 12
             console.log(time_24)
             label_e.text(time_24 + "PM");
@@ -73,7 +66,6 @@ function create_containers() {
         if (time === hour){
             var textarea_e = $("<textarea>");
             textarea_e.attr("class", " hour present col-md-8");
-            
         }
         else if(time < hour){
             var textarea_e = $("<textarea>");
@@ -85,9 +77,6 @@ function create_containers() {
         }
         textarea_e.attr("style", "height: 100%; resize: none;");
         row_e.append(textarea_e);
-
-
-
 
         //Create Save Button
         var save_button_e = $("<button>");
