@@ -13,6 +13,7 @@ var num = 0
 var daily_data = {}
 
 create_containers();
+load_data();
 
 function create_containers() {
     //Create row container
@@ -53,14 +54,48 @@ function save_data(){
     // console.log(textarea_id)
     var text_value = textarea_id.val();
     // console.log(value)
-
     daily_data[button_id] = text_value
     console.log(daily_data)
     // localStorage.setItem(button_id, text_value);
     localStorage.setItem("day_data", JSON.stringify(daily_data));
-    // localStorage.setItem("scores", JSON.stringify(daily_data));
     
 }
+
+function load_data(){
+    if (localStorage.getItem("day_data") === null) {
+        console.log("is not Storage")
+    }
+    else if (localStorage.getItem("day_data") !== null) {
+        console.log("is Storage")
+        var daily_data = JSON.parse(localStorage.getItem("day_data"));
+        console.log(daily_data)
+        
+    }
+}
+
+// save_icon_e.attr("class", "far fa-save");
+        // save_icon_e.attr("style", "font-size: 40px");
+        // save_button_e.append(save_icon_e);
+        // var daily_data = {}
+        // if (localStorage.getItem("day_data") === null) { //If there isnt anything in storage
+        //     console.log("is not Storage")
+        //     var initials_to_save = answer_i_e.value;
+        //     console.log(initials_to_save)
+        //     daily_data[initials_to_save] = score
+        //     console.log(daily_data)
+        //     localStorage.setItem("scores", JSON.stringify(daily_data));
+        // }
+        
+        // else if (localStorage.getItem("day_data") !== null) { //If there is something in storage
+        //     console.log("is Storage")
+        //     var initials_to_save = answer_i_e.value;
+        //     console.log(initials_to_save)
+        //     var daily_data = JSON.parse(localStorage.getItem("scores"));
+        //     console.log(daily_data)
+        //     daily_data[initials_to_save] = score
+        //     console.log(daily_data)
+        //     localStorage.setItem("scores", JSON.stringify(daily_data));
+
 
 
 
