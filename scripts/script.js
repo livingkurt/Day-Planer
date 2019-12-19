@@ -12,8 +12,38 @@ var container_e = $(".container");
 var num = 0
 var daily_data = {}
 
-function save_data(){
+create_containers();
+
+function create_containers() {
+    //Create row container
+    var row_container_e = $("<div>");
+    create_row_container(row_container_e)
+    for (var i = 9; i < 18; i++){
+        var time = i
+        //Create row div
+        var row_e = $("<div>");
+        create_div(row_container_e, row_e);
+        // //Create Time label
+        var label_e = $("<label>");
+        create_label(label_e, row_e, time);
+        //Add 1 to num
+        num++
+        //Create Text Area  
+        var textarea_e = $("<textarea>");
+        create_textarea(textarea_e, num, row_e, time);
+        //Create Save Button
+        var save_button_e = $("<button>");
+        create_buttons(save_button_e, num, row_e);
+        //Create Save Icon
+        var save_icon_e = $("<i>");
+        create_icon(save_icon_e, save_button_e);
+        
+    }
     
+}
+
+function save_data(){
+
     var button_id = this.id
     // console.log(button_id)
     var text_id = "text" + button_id.substring(6)
@@ -27,14 +57,23 @@ function save_data(){
     daily_data[button_id] = text_value
     console.log(daily_data)
     // localStorage.setItem(button_id, text_value);
-    localStorage.setItem("day_data", text_value);
+    localStorage.setItem("day_data", JSON.stringify(daily_data));
     // localStorage.setItem("scores", JSON.stringify(daily_data));
     
 }
 
+
+
+function create_row_container(row_container_e){
+    //Create Row Div    
+    
+    row_container_e.attr("class", "row");
+    row_container_e.attr("style", "height: 100%;");
+    container_e.append(row_container_e);
+}
+
 function create_div(row_container_e, row_e){
     //Create Each row
-    // var row_e = $("<div>");
     row_e.attr("class", "col-md-12");
     row_e.attr("style", "display: flex;");
     row_container_e.append(row_e);
@@ -42,7 +81,6 @@ function create_div(row_container_e, row_e){
 
 function create_label(label_e, row_e, time){
     //Create Time label
-    // var label_e = $("<label>");
     if (time < 13){
         // console.log(time)
         label_e.text(time + "AM");
@@ -55,7 +93,6 @@ function create_label(label_e, row_e, time){
     label_e.attr("class", "hour col-md-1 col-sm-1");
     label_e.attr("style", "height: 100%; padding-left: 36px; min-width: 110px; padding-right: 33px;");
     row_e.append(label_e);
-    // num++
 }
 
 function create_textarea(textarea_e, num, row_e, time){
@@ -89,69 +126,18 @@ function create_icon(save_icon_e, save_button_e){
 }
 
 
-function create_containers() {
-    //Create Row Div
-    var row_container_e = $("<div>");
-    row_container_e.attr("class", "row");
-    row_container_e.attr("style", "height: 100%;");
-    
-    container_e.append(row_container_e);
-    for (var i = 9; i < 18; i++){
-        var time = i
-        var row_e = $("<div>");
-        create_div(row_container_e, row_e);
-        // //Create Each row
-        // var row_e = $("<div>");
-        // row_e.attr("class", "col-md-12");
-        // row_e.attr("style", "display: flex;");
-        // row_container_e.append(row_e);
 
-        // //Create Time label
-        var label_e = $("<label>");
-        create_label(label_e, row_e, time);
-        // if (time < 13){
-        //     // console.log(time)
-        //     label_e.text(time + "AM");
-        // }
-        // else {
-        //     var time_24 = time - 12
-        //     // console.log(time_24)
-        //     label_e.text(time_24 + "PM");
-        // }
-        // label_e.attr("class", "hour col-md-1 col-sm-1");
-        // label_e.attr("style", "height: 100%; padding-left: 36px; min-width: 110px; padding-right: 33px;");
-        
-        //Create Text Area  
 
-        num++
-        var textarea_e = $("<textarea>");
-        create_textarea(textarea_e, num, row_e, time);
-        // if (time === hour){
-            
-        //     textarea_e.attr("class", " hour present col-md-10");
-        // }
-        // else if(time < hour){
-        //     textarea_e.attr("class", " hour past col-md-10");
-        // }
-        // else if(time > hour){
-        //     textarea_e.attr("class", " hour future col-md-10");
-        // }
-        // textarea_e.attr("style", "height: 100%; resize: none; color: black;");
-        // textarea_e.attr("id", "text_" + num);
-        // row_e.append(textarea_e);
-        
-        //Create Save Button
-        var save_button_e = $("<button>");
-        create_buttons(save_button_e, num, row_e);
-        // save_button_e.attr("class", "saveBtn hour col-md-1 col-md-1 save_btn");
-        // save_button_e.attr("id", "button_" + num);
-        // save_button_e.attr("style", "height: 100%;");
-        // row_e.append(save_button_e);
 
-        //Create Save Icon
-        var save_icon_e = $("<i>");
-        create_icon(save_icon_e, save_button_e);
-        // save_icon_e.attr("class", "far fa-save");
+
+$(".save_btn").on("click", save_data)
+
+
+
+})
+
+
+// save_icon_e.attr("class", "far fa-save");
         // save_icon_e.attr("style", "font-size: 40px");
         // save_button_e.append(save_icon_e);
         // var daily_data = {}
@@ -173,22 +159,6 @@ function create_containers() {
         //     daily_data[initials_to_save] = score
         //     console.log(daily_data)
         //     localStorage.setItem("scores", JSON.stringify(daily_data));
-
-
-
-
-
-    }
-    
-}
-
-create_containers();
-
-$(".save_btn").on("click", save_data)
-
-
-
-})
 
 // $("button").on("click", function() {
 
