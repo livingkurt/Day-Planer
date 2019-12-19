@@ -1,7 +1,14 @@
 var now = moment();
 
 
-console.log(now.format('MMMM Do YYYY, h:mm:ss a'))
+// console.log(now.format('h:mm:ss a'))
+
+var hour = now.format('h')
+var minute = now.format('mm')
+var second = now.format('ss')
+
+console.log(hour + minute + second)
+
 
 
 var body_e = $("body");
@@ -17,6 +24,22 @@ var present_e = $(".present");
 var future_e = $(".future");
 var saveBtn_e = $(".saveBtn");
 var present_e = $(".present");
+
+
+var row_container_e = $("<div>");
+var row_e = $("<div>");
+// var textarea_e = $("<textarea>");
+// var save_button_e = $("<button>");
+// var save_icon_e = $("<i>");
+
+// function create_row_container() {
+// var row_e = $("<div>");
+//         row_e.attr("class", "col-md-12");
+//         row_e.attr("style", "display: flex;");
+//         row_container_e.append(row_e);
+// }
+
+
 
 
 function create_containers() {
@@ -47,36 +70,25 @@ function create_containers() {
             label_e.text(time_pm + "PM");
         }
         label_e.attr("class", "hour col-md-2");
-
-        // label_e.attr("style", "top: -50px; ");
         label_e.attr("style", "height: 100%;");
         row_e.append(label_e);
 
         //Create Text Area
         var textarea_e = $("<textarea>");
-        // textarea_e.text("Daily Tasks");
-
         textarea_e.attr("class", "description hour present col-md-8");
-        textarea_e.attr("placeholder", "Daily Task");
         textarea_e.attr("style", "height: 100%;");
         row_e.append(textarea_e);
 
         //Create Save Button
         var save_button_e = $("<button>");
-        // save_button_e.text("Daily Tasks");
         save_button_e.attr("class", "saveBtn hour col-md-2");
         save_button_e.attr("style", "height: 100%;");
-        // save_button_e.attr("style", "height: 69px; top: -3px;");
-        
         row_e.append(save_button_e);
 
         //Create Save Icon
         var save_icon_e = $("<i>");
-        // save_button_e.text("Daily Tasks");
         save_icon_e.attr("class", "far fa-save");
         save_icon_e.attr("style", "font-size: 40px");
-        // save_button_e.attr("style", "height: 69px; top: -3px;");
-        
         save_button_e.append(save_icon_e);
 
 
@@ -86,9 +98,5 @@ function create_containers() {
 
 create_containers();
 
-
-function create_row_div() {
-    
-}
 
 
