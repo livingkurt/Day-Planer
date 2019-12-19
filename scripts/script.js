@@ -10,7 +10,7 @@ var hour = now.format('HH')
 var hour = 13
 var container_e = $(".container");
 var num = 0
-var daily_data = {}
+
 
 create_containers();
 load_data();
@@ -38,30 +38,31 @@ function create_containers() {
         //Create Save Icon
         var save_icon_e = $("<i>");
         create_icon(save_icon_e, save_button_e);
-        
     }
-    
 }
-
+var daily_data = {}
 function save_data(){
-
+    
     var button_id = this.id
     // console.log(button_id)
-    var text_id = "text" + button_id.substring(6)
-    text_id = "#" + text_id
+    var text_i = "text" + button_id.substring(6)
+    text_id = "#" + text_i
     // console.log(text_id)
     var textarea_id = $(text_id);
     // console.log(textarea_id)
     var text_value = textarea_id.val();
+    load_data();
     // console.log(value)
-    daily_data[button_id] = text_value
+    daily_data[text_i] = text_value
     console.log(daily_data)
+    
     // localStorage.setItem(button_id, text_value);
     localStorage.setItem("day_data", JSON.stringify(daily_data));
     
 }
 
 function load_data(){
+    
     if (localStorage.getItem("day_data") === null) {
         console.log("is not Storage")
     }
@@ -69,9 +70,18 @@ function load_data(){
         console.log("is Storage")
         var daily_data = JSON.parse(localStorage.getItem("day_data"));
         console.log(daily_data)
-        
+        for (var i = 1; i < 10; i++){
+            // console.log(i)
+            var data_get = "text_" + i
+            console.log(data_get)
+            console.log(daily_data.data_get)
+
+
+        }
     }
 }
+
+
 
 // save_icon_e.attr("class", "far fa-save");
         // save_icon_e.attr("style", "font-size: 40px");
