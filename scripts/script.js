@@ -6,39 +6,24 @@ var now = moment();
 // console.log(now.format('h:mm:ss a'))
 
 var hour = now.format('HH')
-// var minute = now.format('mm')
-// var second = now.format('ss')
-
-// console.log(hour)
 
 var hour = 13
 var container_e = $(".container");
 var num = 0
 
 
-// var body_e = $("body");
-
-// var textarea_e = $("textarea");
-// var jumbotron_e = $(".jumbotron");
-// var description_e = $(".description");
-// var time_block_e = $(".time-block");
-// var row_e = $(".row");
-// var hour_e = $(".hour");
-// var past_e = $(".past");
-// var present_e = $(".present");
-// var future_e = $(".future");
-// var saveBtn_e = $(".saveBtn");
-// var present_e = $(".present");
-
-
-// var row_container_e = $("<div>");
-// var row_e = $("<div>");
-
 function save_data(){
     var button_id = this.id
-    console.log(button_id)
+    // console.log(button_id)
     var text_id = "text" + button_id.substring(6)
-    console.log(text_id)
+    text_id = "#" + text_id
+    // console.log(text_id)
+    var textarea_id = $(text_id);
+    // console.log(textarea_id)
+    var value = textarea_id.val();
+    // console.log(value)
+    localStorage.setItem(button_id, value);
+    // localStorage.setItem("scores", JSON.stringify(daily_data));
 }
 
 
