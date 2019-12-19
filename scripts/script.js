@@ -65,46 +65,26 @@ function create_containers() {
             console.log(time_24)
             label_e.text(time_24 + "PM");
         }
-        
-        label_e.attr("class", "hour col-md-2");
-        label_e.attr("style", "height: 100%; padding-left: 140px;");
+        label_e.attr("class", "hour");
+        label_e.attr("style", "height: 100%; padding-left: 36px; min-width: 110px; padding-right: 33px;");
+
+        //Create Text Area  
         row_e.append(label_e);
-
-        // //Create Text Area
-        // var textarea_e = $("<textarea>");
-        // textarea_e.attr("class", "description hour present col-md-8");
-        // textarea_e.attr("style", "height: 100%;");
-        // row_e.append(textarea_e);
-
         if (time === hour){
-            //Create Text Area
             var textarea_e = $("<textarea>");
             textarea_e.attr("class", " hour present col-md-8");
-            textarea_e.attr("style", "height: 100%;");
-            row_e.append(textarea_e);
+            
         }
         else if(time < hour){
-            //Create Text Area
             var textarea_e = $("<textarea>");
             textarea_e.attr("class", " hour past col-md-8");
-            textarea_e.attr("style", "height: 100%;");
-            row_e.append(textarea_e);
         }
         else if(time > hour){
-            //Create Text Area
             var textarea_e = $("<textarea>");
             textarea_e.attr("class", " hour future col-md-8");
-            textarea_e.attr("style", "height: 100%;");
-            row_e.append(textarea_e);
         }
-        // else if (time > 1) {
-        //     //Create Text Area
-        //     var textarea_e = $("<textarea>");
-        //     textarea_e.attr("class", "description hour future col-md-8");
-        //     textarea_e.attr("style", "height: 100%;");
-        //     row_e.append(textarea_e);
-
-        // }
+        textarea_e.attr("style", "height: 100%; resize: none;");
+        row_e.append(textarea_e);
 
 
 
