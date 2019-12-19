@@ -6,8 +6,25 @@ var now = moment();
 // console.log(now.format('h:mm:ss a'))
 
 var hour = now.format('HH')
+// console.log(hour)
+// console.log(hour.substring(1))
 
-var hour = 13
+var hour_format = parseInt(hour.substring(1));
+
+// console.log(hour_format)
+
+if (hour_format === "0"){
+    var hour = now.format('HH')
+    console.log(hour)
+}
+else {
+    var hour = now.format('H')
+    console.log(hour)
+}
+
+hour = parseInt(hour)
+
+// var hour = 9
 var container_e = $(".container");
 var num = 0
 
