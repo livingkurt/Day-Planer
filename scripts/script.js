@@ -13,7 +13,14 @@ var hour = now.format('HH')
 var container_e = $(".container");
 var jumbotron_e = $(".jumbotron")
 var current_day_e = $("#currentDay");
-var text_areas_e = $(".text_areas");
+
+
+var clear_button_e = $("<button>");
+clear_button_e.text("Clear Planner")
+jumbotron_e.append(clear_button_e);
+
+
+
 current_day_e.html(moment().format('MMMM Do, YYYY H:mm:ss a'));
 var num = 0
 
@@ -41,35 +48,7 @@ var first = $("#text_1")
 console.log(key)
 console.log(values)
 
-for (var i = 1; i < data_length; i++){
-    // console.log(i)
-    // var data_get = "text_" + i
-    // console.log(data_get)
-    // console.log(daily_data.data_get)
-// }
-// for (var i = 0; i < data_length; i++) {
-    console.log(i)
-    var text_boxes = key[i];
-    var tasks = values[i];
-    console.log(tasks)
-    // text_boxes = $("'#" + keys[i] + "'")
-    console.log(String(text_boxes))
-    // console.log(tasks)
-    
-    // var num = i + 2
-    // var user_data = (i + 1) + ". " + user_name.toUpperCase() + " - " + user_score
-    // var li = document.createElement("li");
-    // text_boxes.textContent = tasks;
-    $(text_boxes).text(tasks)
-    // li.setAttribute("data-index", i);
-    // li.setAttribute("style", "background-color: rgb(1, 10, 49); padding: 5px; border: 1px solid rgb(1, 12, 49); color: white; border-radius: 10px; margin-bottom: 7px;");
-    // saved_highscores_ul_e.setAttribute("style", "display: flex;"); 
-    // saved_highscores_ul_e.appendChild(li);
-}
 
-
-
-// load_data();
 get_time();
 create_containers();
 
@@ -105,10 +84,13 @@ function get_time(){
 function create_containers() {
     //Create row container
     var row_container_e = $("<div>");
+    var new_time = -1;
     create_row_container(row_container_e)
     for (var i = 9; i < 18; i++){
         var time = i
+        
         //Create row div
+        new_time++
         var row_e = $("<div>");
         create_div(row_container_e, row_e);
         // //Create Time label
@@ -118,7 +100,7 @@ function create_containers() {
         num++
         //Create Text Area  
         var textarea_e = $("<textarea>");
-        create_textarea(textarea_e, num, row_e, time);
+        create_textarea(textarea_e, num, row_e, time, new_time);
         //Create Save Button
         var save_button_e = $("<button>");
         create_buttons(save_button_e, num, row_e);
@@ -184,7 +166,7 @@ function create_label(label_e, row_e, time){
     row_e.append(label_e);
 }
 
-function create_textarea(textarea_e, num, row_e, time){
+function create_textarea(textarea_e, num, row_e, time, new_time){
     if (time === hour){
         textarea_e.attr("class", "hour present col-md-10 text_areas");
     }
@@ -194,9 +176,24 @@ function create_textarea(textarea_e, num, row_e, time){
     else if(time > hour){
         textarea_e.attr("class", "hour future col-md-10 text_areas");
     }
+    // console.log(time)
+    
+    console.log(new_time)
+    var text_boxes = key[new_time];
+    var tasks = values[new_time];
+    // console.log(tasks)
+    // text_boxes = $("'#" + keys[i] + "'")
+    // console.log(String(text_boxes))
+    // console.log(tasks)
+    
+    // var num = i + 2
+    // var user_data = (i + 1) + ". " + user_name.toUpperCase() + " - " + user_score
+    // var li = document.createElement("li");
+    // text_boxes.textContent = tasks;
+    // $(text_boxes).text(tasks)
     textarea_e.attr("style", "height: 100%; resize: none; color: black;");
     textarea_e.attr("id", "text_" + num);
-    textarea_e.text("Daily");
+    textarea_e.text(tasks);
     row_e.append(textarea_e);
 
 }
@@ -214,6 +211,16 @@ function create_icon(save_icon_e, save_button_e){
     save_icon_e.attr("style", "font-size: 40px");
     save_button_e.append(save_icon_e);
 }
+
+function clear_planer() {
+    var text_areas_e = $(".text_areas");
+    localStorage.clear();
+    text_areas_e.text("");
+
+    
+}
+
+clear_button_e.on("click",clear_planer)
 
 
 
