@@ -1,6 +1,7 @@
-# Day-Planer
+# Day-Planner
 
-
+Preview Site
+https://livingkurt.github.io/Day-Planner/
 
 ## Pitch
 
