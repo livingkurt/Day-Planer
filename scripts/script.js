@@ -14,10 +14,15 @@ var container_e = $(".container");
 var jumbotron_e = $(".jumbotron")
 var current_day_e = $("#currentDay");
 
+var save_all_button_e = $("<button>");
+save_all_button_e.text("Save All")
+jumbotron_e.append(save_all_button_e);
 
 var clear_button_e = $("<button>");
 clear_button_e.text("Clear Planner")
 jumbotron_e.append(clear_button_e);
+
+
 
 
 
@@ -53,8 +58,6 @@ function update() {
     current_day_e.html(moment().format('MMMM Do, YYYY h:mm:ss a'));
 }
 setInterval(update, 1000);
-
-
 
 
 function get_time(){
@@ -126,6 +129,28 @@ function save_data(){
     localStorage.setItem("day_data", JSON.stringify(daily_data));
     
 }
+
+function save_all(){
+    // var text_value = textarea_id.val();
+    // var button_id = this.id
+    for (var i = 1; i < 10; i++){
+        // console.log(button_id)
+        var text_i = "text_" + i
+        console.log(text_i)
+        text_id = "#" + text_i
+        // // console.log(text_id)
+        var textarea_id = $(text_id);
+        console.log(textarea_id)
+        var text_value = textarea_id.val();
+        // // load_data();
+        // // console.log(value)
+        daily_data[text_i] = text_value
+        console.log(daily_data)
+        
+    }
+    localStorage.setItem("day_data", JSON.stringify(daily_data));
+}
+
 
 
 function create_row_container(row_container_e){
@@ -210,13 +235,15 @@ function clear_planer() {
     // text_areas_e.text("");
     text_areas_e.val('')
     localStorage.clear();
-
     console.log("clear storage")
 
     
 }
 
+
+
 clear_button_e.on("click",clear_planer)
+save_all_button_e.on("click",save_all)
 
 
 
