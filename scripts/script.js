@@ -34,11 +34,7 @@ if (stored_daily_data !== null) {
     daily_data = stored_daily_data;
 }
 
-// console.log("is Storage")
-// var daily_data = JSON.parse(localStorage.getItem("day_data"));
-console.log(daily_data)
-// var text = "text_1"
-// console.log(daily_data.text)
+
 var data_length = Object.keys(daily_data).length
 var key = Object.keys(daily_data);
 var values = Object.values(daily_data);
@@ -54,7 +50,7 @@ create_containers();
 
 
 function update() {
-    current_day_e.html(moment().format('MMMM Do, YYYY H:mm:ss a'));
+    current_day_e.html(moment().format('MMMM Do, YYYY h:mm:ss a'));
 }
 setInterval(update, 1000);
 
@@ -62,11 +58,8 @@ setInterval(update, 1000);
 
 
 function get_time(){
-    // console.log(hour)
-    // console.log(hour.substring(1))
-    // var hour = "13"
     var hour_format = parseInt(hour.substring(1));
-    // console.log(hour_format)
+
     if (hour_format === "0"){
         hour = now.format('HH')
         // var hour = "13"
@@ -214,16 +207,16 @@ function create_icon(save_icon_e, save_button_e){
 
 function clear_planer() {
     var text_areas_e = $(".text_areas");
+    // text_areas_e.text("");
+    text_areas_e.val('')
     localStorage.clear();
-    text_areas_e.text("");
+
+    console.log("clear storage")
 
     
 }
 
 clear_button_e.on("click",clear_planer)
-
-
-
 
 
 
