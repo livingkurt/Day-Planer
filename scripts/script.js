@@ -24,17 +24,12 @@ jumbotron_e.append(clear_button_e);
 
 
 
-
-
-current_day_e.html(moment().format('MMMM Do, YYYY H:mm:ss a'));
+current_day_e.html(moment().format('MMMM Do, YYYY h:mm:ss a'));
 var num = 0
 
 var daily_data = {"text_1": "", "text_2": "", "text_3": "", "text_4": "", "text_5": "", "text_6": "", "text_7": "", "text_8": "", "text_9": ""}
-
-// var daily_data = {"text_1": "", "text_2": "", "text_3": "", "text_4": "", "text_5": "", "text_6": "", "text_7": "", "text_8": "", "text_9": ""}
 var stored_daily_data = JSON.parse(localStorage.getItem("day_data"));
 
-// If todos were retrieved from localStorage, update the todos array to it
 if (stored_daily_data !== null) {
     daily_data = stored_daily_data;
 }
@@ -65,13 +60,9 @@ function get_time(){
 
     if (hour_format === "0"){
         hour = now.format('HH')
-        // var hour = "13"
-        // console.log(hour)
     }
     else {
         hour = now.format('H')
-        // var hour = "13"
-        // console.log(hour)
     }
     hour = parseInt(hour)
 
@@ -108,45 +99,28 @@ function create_containers() {
 
 
 
-$(".save_btn").on("click", save_data)
-
 function save_data(){
-    
     var button_id = this.id
-    // console.log(button_id)
     var text_i = "text" + button_id.substring(6)
     text_id = "#" + text_i
-    // console.log(text_id)
     var textarea_id = $(text_id);
-    // console.log(textarea_id)
     var text_value = textarea_id.val();
-    // load_data();
-    // console.log(value)
     daily_data[text_i] = text_value
     console.log(daily_data)
-    
-    // localStorage.setItem(button_id, text_value);
     localStorage.setItem("day_data", JSON.stringify(daily_data));
     
 }
 
 function save_all(){
-    // var text_value = textarea_id.val();
-    // var button_id = this.id
     for (var i = 1; i < 10; i++){
-        // console.log(button_id)
         var text_i = "text_" + i
         console.log(text_i)
         text_id = "#" + text_i
-        // // console.log(text_id)
         var textarea_id = $(text_id);
         console.log(textarea_id)
         var text_value = textarea_id.val();
-        // // load_data();
-        // // console.log(value)
         daily_data[text_i] = text_value
         console.log(daily_data)
-        
     }
     localStorage.setItem("day_data", JSON.stringify(daily_data));
 }
@@ -155,7 +129,6 @@ function save_all(){
 
 function create_row_container(row_container_e){
     //Create Row Div    
-    
     row_container_e.attr("class", "row");
     row_container_e.attr("style", "height: 100%;");
     container_e.append(row_container_e);
@@ -194,21 +167,9 @@ function create_textarea(textarea_e, num, row_e, time, new_time){
     else if(time > hour){
         textarea_e.attr("class", "hour future col-md-10 text_areas");
     }
-    // console.log(time)
-    
     console.log(new_time)
     var text_boxes = key[new_time];
     var tasks = values[new_time];
-    // console.log(tasks)
-    // text_boxes = $("'#" + keys[i] + "'")
-    // console.log(String(text_boxes))
-    // console.log(tasks)
-    
-    // var num = i + 2
-    // var user_data = (i + 1) + ". " + user_name.toUpperCase() + " - " + user_score
-    // var li = document.createElement("li");
-    // text_boxes.textContent = tasks;
-    // $(text_boxes).text(tasks)
     textarea_e.attr("style", "height: 100%; resize: none; color: black;");
     textarea_e.attr("id", "text_" + num);
     textarea_e.text(tasks);
@@ -232,7 +193,6 @@ function create_icon(save_icon_e, save_button_e){
 
 function clear_planer() {
     var text_areas_e = $(".text_areas");
-    // text_areas_e.text("");
     text_areas_e.val('')
     localStorage.clear();
     console.log("clear storage")
@@ -244,6 +204,7 @@ function clear_planer() {
 
 clear_button_e.on("click",clear_planer)
 save_all_button_e.on("click",save_all)
+$(".save_btn").on("click", save_data)
 
 
 
